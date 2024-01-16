@@ -1,3 +1,4 @@
+import { StyledEngineProvider } from "@mui/system";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
@@ -12,18 +13,20 @@ import NotFoundRedirect from "./pages/NotFoundRedirect.tsx";
 import ThemeInit from "./themeInit.tsx";
 
 const router = createBrowserRouter(
-    createRoutesFromElements(
-        <Route element={<RootLayout />}>
-            <Route path="/" element={<ThemeInit />} />
-            <Route path="*" element={<NotFoundRedirect />} />
-        </Route>
-    )
+  createRoutesFromElements(
+    <Route element={<RootLayout />}>
+      <Route path="/" element={<ThemeInit />} />
+      <Route path="*" element={<NotFoundRedirect />} />
+    </Route>
+  )
 );
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
-        <ThemeContextProvider>
-            <RouterProvider router={router} />
-        </ThemeContextProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <StyledEngineProvider injectFirst>
+      <ThemeContextProvider>
+        <RouterProvider router={router} />
+      </ThemeContextProvider>
+    </StyledEngineProvider>
+  </React.StrictMode>
 );

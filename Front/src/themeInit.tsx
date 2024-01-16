@@ -3,14 +3,16 @@ import App from "./App";
 import { useThemeSelector } from "./context/ThemeContext";
 
 function ThemeInit() {
-    const { theme } = useThemeSelector();
+  const { theme } = useThemeSelector();
 
-    return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline enableColorScheme />
-            <App />
-        </ThemeProvider>
-    );
+  return (
+    <div className="flex">
+      <ThemeProvider theme={theme}>
+        <CssBaseline enableColorScheme />
+        <App />
+      </ThemeProvider>
+    </div>
+  );
 }
 
 export default ThemeInit;

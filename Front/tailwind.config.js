@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{ts,tsx}"
   ],
+  important: "#root",
   theme: {
     extend: {},
   },
