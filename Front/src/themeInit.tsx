@@ -6,12 +6,10 @@ function ThemeInit() {
   const { theme } = useThemeSelector();
 
   return (
-    <div className="flex">
-      <ThemeProvider theme={theme}>
-        <CssBaseline enableColorScheme />
-        <App />
-      </ThemeProvider>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline enableColorScheme />
+      <App />
+    </ThemeProvider>
   );
 }
 
