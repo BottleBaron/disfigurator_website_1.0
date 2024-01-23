@@ -7,26 +7,30 @@ import {
     createBrowserRouter,
     createRoutesFromElements,
 } from "react-router-dom";
+import App from "./App.tsx";
 import RootLayout from "./components/RootLayout.tsx";
 import { ThemeContextProvider } from "./context/ThemeContext.tsx";
+import NewsPage from "./pages/NewsPage.tsx";
 import NotFoundRedirect from "./pages/NotFoundRedirect.tsx";
-import ThemeInit from "./themeInit.tsx";
+import ContactPage from "./pages/ContactPage.tsx";
 
 const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route element={<RootLayout />}>
-      <Route path="/" element={<ThemeInit />} />
-      <Route path="*" element={<NotFoundRedirect />} />
-    </Route>
-  )
+    createRoutesFromElements(
+        <Route element={<RootLayout />}>
+            <Route path="/" element={<App />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundRedirect />} />
+        </Route>
+    )
 );
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <StyledEngineProvider injectFirst>
-      <ThemeContextProvider>
-        <RouterProvider router={router} />
-      </ThemeContextProvider>
-    </StyledEngineProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <StyledEngineProvider injectFirst>
+            <ThemeContextProvider>
+                <RouterProvider router={router} />
+            </ThemeContextProvider>
+        </StyledEngineProvider>
+    </React.StrictMode>
 );
