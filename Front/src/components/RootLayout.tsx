@@ -35,6 +35,9 @@ export default function RootLayout() {
             alt="Disfigurator Logo"
           />
         </NavLink>
+        <Box>
+          <p>Sometext </p>
+        </Box>
         <Box
           sx={{
             display: "flex",
@@ -58,7 +61,7 @@ export default function RootLayout() {
               width: '30%',
               position: "absolute",
               top: '10vw',
-              left: '35%',
+              left: '35.2%',
             }}
             src="../../resources/Disfigurator-Logo-vit.png"
             alt="Logo"
@@ -82,7 +85,7 @@ export default function RootLayout() {
       >
         <Outlet />
       </Box>
-      <Box component="footer" sx={{ display: "flex", flexShrink: 0 }}>
+      <Box component="footer" sx={{ display: "flex", flexShrink: 0, position: 'relative' }}>
         <Typography>Intellectual property of Disfigurator © 2023</Typography>
       </Box>
     </Box>

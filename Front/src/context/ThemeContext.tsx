@@ -30,6 +30,8 @@ interface ThemeProviderProps {
 // FIXME:  themeproviderprops
 export function ThemeContextProvider({ children }: ThemeProviderProps) {
     const loadClientThemePreference = () => {
+        
+        /*
         const prefersDarktheme = window.matchMedia(
             "(prefers-color-scheme: dark)"
         ).matches;
@@ -46,6 +48,11 @@ export function ThemeContextProvider({ children }: ThemeProviderProps) {
                       mode: "light",
                   },
               });
+        */
+        return createTheme({
+                palette: {
+                    mode: "dark",
+                },});
     };
 
     const [theme, setTheme] = useState<Theme>(loadClientThemePreference);
