@@ -49,10 +49,10 @@ export default function RootLayout() {
                             marginInline: 10,
                         }}
                     >
-                        <NavLink style={{ paddingInline: 10 }} to="/">
-                            About
+                        <NavLink style={{ paddingInline: 10 }} to="/contact">
+                            Contact
                         </NavLink>
-                        <NavLink style={{ paddingInline: 10 }} to="/">
+                        <NavLink style={{ paddingInline: 10 }} to="/news">
                             News
                         </NavLink>
                     </Box>
