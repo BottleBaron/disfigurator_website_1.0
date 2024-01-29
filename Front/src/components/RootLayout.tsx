@@ -24,36 +24,120 @@ export default function RootLayout() {
                         top: 0,
                         left: 0,
                         width: "100%",
-                        height: 100,
+                        height: "7vw",
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "space-between",
                         alignItems: "center",
+                        zIndex: 100,
                     }}
                 >
                     {/* FIXME: Change logo image*/}
                     <NavLink style={{ marginInline: 50 }} to="/">
                         <img
-                            style={{ height: "auto", width: 125 }}
+                            style={{ height: "3.5vw", width: "auto" }}
                             src="../../resources/Disfigurator-Logo-Vit.png"
                             alt="Disfigurator Logo"
                         />
                     </NavLink>
-                    <Box>
-                        <p>Sometext </p>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginInline: 10,
+                        }}
+                    >
+                        <NavLink
+                            style={{
+                                paddingInline: 10,
+                                fontSize: "1.3vw",
+                            }}
+                            to="/contact"
+                        >
+                            CONTACT
+                        </NavLink>
+                        <NavLink
+                            style={{
+                                paddingInline: 10,
+                                fontSize: "1.3vw",
+                            }}
+                            to="/news"
+                        >
+                            NEWS
+                        </NavLink>
                     </Box>
                     <Box
                         sx={{
                             display: "flex",
                             flexDirection: "row",
+                            justifyContent: "center",
+                            alignItems: "center",
                             marginInline: 10,
                         }}
                     >
-                        <NavLink style={{ paddingInline: 10 }} to="/contact">
-                            Contact
+                        <NavLink to="https://www.facebook.com/profile.php?id=100064525667229&locale=sv_SE">
+                            <img
+                                style={{
+                                    height: "auto",
+                                    width: "1.5vw",
+                                    marginInline: 5,
+                                }}
+                                src="../../resources/icons/ic--baseline-facebook.svg"
+                                alt="fb"
+                            />
                         </NavLink>
-                        <NavLink style={{ paddingInline: 10 }} to="/news">
-                            News
+                        <NavLink to="https://www.instagram.com/disfigurator/?next=%2F24072013ilij%2Ftagged%2F&">
+                            <img
+                                style={{
+                                    height: "auto",
+                                    width: "1.5vw",
+                                    marginInline: 5,
+                                }}
+                                src="../../resources/icons/mdi--instagram.svg"
+                                alt="insta"
+                            />
+                        </NavLink>
+                        <NavLink to="https://www.threads.net/@disfigurator">
+                            <img
+                                style={{
+                                    height: "auto",
+                                    width: "1.5vw",
+                                    marginInline: 5,
+                                }}
+                                src="../../resources/icons/mingcute--threads-line.svg"
+                            />
+                        </NavLink>
+                        <NavLink to="https://linktr.ee/disfigurator">
+                            <img
+                                style={{
+                                    height: "auto",
+                                    width: "1.5vw",
+                                    marginInline: 5,
+                                }}
+                                src="../../resources/icons/simple-icons--linktree.svg"
+                            />
+                        </NavLink>
+                        <NavLink to="https://open.spotify.com/artist/6QSGrK5gotJxfy6mf3uLfJ?si=9O7q-QEpTxmikc7A9ENqLQ">
+                            <img
+                                style={{
+                                    height: "auto",
+                                    width: "1.5vw",
+                                    marginInline: 5,
+                                }}
+                                src="../../resources/icons/mdi--spotify.svg"
+                            />
+                        </NavLink>
+                        <NavLink to="https://www.youtube.com/@disfigurator">
+                            <img
+                                style={{
+                                    height: "auto",
+                                    width: "1.5vw",
+                                    marginInline: 5,
+                                }}
+                                src="../../resources/icons/mdi--youtube.svg"
+                            />
                         </NavLink>
                     </Box>
                 </Box>
