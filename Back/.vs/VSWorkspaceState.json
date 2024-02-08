@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\bin\\Release",
-    "\\obj",
-    "\\Properties"
+    "\\Model",
+    "\\obj"
   ],
-  "SelectedNode": "\\Program.cs",
+  "SelectedNode": "\\Back.sln",
   "PreviewInSolutionExplorer": false
 }
