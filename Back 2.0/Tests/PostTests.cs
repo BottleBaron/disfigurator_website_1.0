@@ -1,9 +1,9 @@
 namespace Back.Tests;
 
 using Xunit;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using Back.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.InMemory;
 using FluentAssertions;
 
 public class PostModelTests
@@ -22,7 +22,7 @@ public class PostModelTests
     public void PostModel_Properties_SetCorrectly()
     {
         // Arrange
-        var id = 1;
+        var id = "test";
         var content = "Test Content";
         var title = "Test Title";
         var imageUrls = new[] { "url1", "url2" };

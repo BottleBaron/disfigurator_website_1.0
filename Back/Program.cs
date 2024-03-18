@@ -1,27 +1,25 @@
 using Back.Model;
+using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
-
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.OpenApi.Models;
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 // Sida för tutorial: https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-8.0&tabs=visual-studio
 
+// Mongo DB: https://www.mongodb.com/docs/entity-framework/current/quick-reference/
+// https://www.mongodb.com/docs/entity-framework/current/quick-start/#std-label-entity-framework-quickstart
 
-string? connectionString = Environment.GetEnvironmentVariable("PLACEHOLDER");
-
-
-if (connectionString == null)
-{
-    Console.WriteLine("You must set your 'MONGODB_URI' environment variable. To learn how to set it, see https://www.mongodb.com/docs/drivers/csharp/current/quick-start/#set-your-connection-string");
-    Environment.Exit(0);
-}
-var client = new MongoClient(connectionString);
-var db = PostContext.Create(client.GetDatabase("seeded_db"));
+// FIXME: Current issue: Swagger not loading controller endpoints.
+// Continue looking into integration.Shopify to see how we utilized mongo previously
 
 
+var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddControllers();
+builder.Services.AddDbContext<PostContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -33,32 +31,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+app.UseAuthorization();
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.MapControllers();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
