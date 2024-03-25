@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 // Continue working on removing efcore: https://dev.to/arminafa/create-a-web-api-with-aspnet-core-7-and-mongodb-2j51
+namespace Back;
 
 public class Program
 {

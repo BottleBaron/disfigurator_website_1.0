@@ -2,7 +2,6 @@
 using System.Net;
 using FluentAssertions;
 using Xunit;
-using NuGet.Configuration;
 using System.Runtime.CompilerServices;
 using MongoDB.Driver;
 using MongoDB.Bson;

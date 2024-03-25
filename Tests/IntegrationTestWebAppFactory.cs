@@ -1,11 +1,9 @@
-﻿using Back.Model;
+﻿using Back;
 using EphemeralMongo;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using Autofac.Extras.FakeItEasy;
-using FakeItEasy;
+
 using Xunit;
 
 namespace Back_2._0.Tests
