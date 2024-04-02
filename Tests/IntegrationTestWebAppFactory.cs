@@ -1,18 +1,20 @@
 ﻿using Back;
 using EphemeralMongo;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.AspNetCore.Hosting;
 using MongoDB.Driver;
-
 using Xunit;
+using Microsoft.Extensions.DependencyInjection;
+using Back.Model;
 
 namespace Back_2._0.Tests
 {
     public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>
     {
-        IMongoRunner runner;
+        IMongoRunner? runner;
 
-        protected IntegrationTestWebAppFactory()
+        protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             var options = new MongoRunnerOptions
             {
@@ -23,13 +25,13 @@ namespace Back_2._0.Tests
 
             runner = MongoRunner.Run(options);
             Console.WriteLine(runner.ConnectionString);
-        }
 
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
-        {
+            if(runner == null) throw new ArgumentNullException(nameof(runner));
+
             builder.ConfigureTestServices(services =>
             {
-                services.AddSingleton(provider => {
+                services.AddSingleton(provider =>
+                {
                     return new PostContext(runner.ConnectionString, "test");
                 });
 

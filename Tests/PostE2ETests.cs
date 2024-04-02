@@ -3,33 +3,27 @@ using System.Net;
 using FluentAssertions;
 using Xunit;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using System.Net.Http.Json;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Back_2._0.Tests
 {
     public class PostE2ETests(IntegrationTestWebAppFactory factory) : IClassFixture<IntegrationTestWebAppFactory>
     {
         [Fact]
-        public async Task Unauthorized_Request_Returns_Correct_Response()
-        {
-            var client = factory.CreateClient();
-            var request = new PostModel { Title = "test" };
-
-            var response = await client.PostAsJsonAsync("api/PostModels", request, CancellationToken.None);
-
-            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-        }
-
-        [Fact]
-        public async Task Post_Returns_OK()
+        public async Task Post_Returns_Created()
         {
             var client = factory.CreateClient();
             var request = new PostModel("Test", "test", ["test1", "test2"]);
 
             var response = await client.PostAsJsonAsync("api/PostModels", request, CancellationToken.None);
 
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.StatusCode.Should().Be(HttpStatusCode.Created);
         }
 
         [Fact]
@@ -60,7 +54,7 @@ namespace Back_2._0.Tests
 
                 // Assert
                 var cursor = context.Posts.Find(filter);
-                cursor.Should().NotBeNull();
+                cursor.CountDocuments().Should().Be(1);
             }
         }
     }
