@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
@@ -15,5 +16,12 @@ const initialState: typeof PostState = [];
 const postSlice = createSlice({
     name: "post",
     initialState,
-    reducers: {},
+    reducers: {
+        setPosts: (state: any, action: PayloadAction<Post[]>) => {
+            state.posts = action.payload;
+        },
+    },
+    extraReducers: {},
 });
+
+export const postReducer = postSlice.reducer;
