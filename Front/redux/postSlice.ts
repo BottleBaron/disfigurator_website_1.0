@@ -21,7 +21,8 @@ const postSlice = createSlice({
             state.posts = action.payload;
         },
     },
-    extraReducers: {},
+    //extraReducers: {},
 });
 
+export const { setPosts } = postSlice.actions;
 export const postReducer = postSlice.reducer;

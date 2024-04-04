@@ -24,8 +24,8 @@ export async function getSinglePost(id: number): Promise<Post> {
     return data as Post;
 }
 
-export async function putPost(id: number, updatedPost: Post) {
-    await fetch(`${apiEndPoint}/${id}`, {
+export async function putPost(updatedPost: Post) {
+    await fetch(`${apiEndPoint}/${updatedPost.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
