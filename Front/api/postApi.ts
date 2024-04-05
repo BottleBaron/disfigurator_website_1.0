@@ -1,4 +1,4 @@
-import { Post } from "../redux/postSlice";
+import { Post } from "../src/redux/postSlice";
 
 const apiEndPoint: string = "api/PostModels";
 

@@ -1,8 +1,11 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { mockPosts } from "../../resources/testData/mockData";
+import { useAppDispatch } from "../redux/store";
 
 function NewsPage() {
+    const dispatch = useAppDispatch();
+
     return (
         <Box
             sx={{

@@ -1,4 +1,4 @@
-import { createPost, getPosts, putPost } from "../api/postApi";
+import { createPost, getPosts, putPost } from "../../api/postApi";
 import { Post } from "./postSlice";
 import createAppAsyncThunk from "./utils";
 
