@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createPost, getPosts, putPost } from "../../api/postApi";
 import { Post } from "./postSlice";
 import createAppAsyncThunk from "./utils";
@@ -7,7 +8,7 @@ export const addPost = createAppAsyncThunk<void, Post>(
     async (newPost: Post, thunkAPI) => {
         try {
             await createPost(newPost);
-        } catch (e) {
+        } catch (e: any) {
             return thunkAPI.rejectWithValue(e.message);
         }
     }
@@ -17,32 +18,34 @@ export const fetchPosts = createAppAsyncThunk<Post[], void>(
     async (n, thunkApi) => {
         try {
             return await getPosts();
-        } catch (e) {
+        } catch (e: any) {
             return thunkApi.rejectWithValue(e.message);
         }
     }
 );
-export const updatePost = createAppAsyncThunk<void, Post>(
+export const updatePost = createAppAsyncThunk<Post, Post>(
     "post/update",
     async (updatedPost: Post, thunkAPI) => {
-        if (!updatedPost.id) {
+        if (!updatedPost._id) {
             return thunkAPI.rejectWithValue(
                 "userData requires an Id to update"
             );
         }
         try {
             await putPost(updatedPost);
-        } catch (e) {
+            return updatedPost;
+        } catch (e: any) {
             return thunkAPI.rejectWithValue(e.message);
         }
     }
 );
-export const deletePost = createAppAsyncThunk<void, string>(
+export const deletePost = createAppAsyncThunk<string, string>(
     "post/delete",
     async (postId: string, thunkAPI) => {
         try {
             await deletePost(postId);
-        } catch (e) {
+            return postId;
+        } catch (e: any) {
             return thunkAPI.rejectWithValue(e.message);
         }
     }

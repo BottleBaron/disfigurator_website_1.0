@@ -1,11 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Post } from "../src/redux/postSlice";
 
-const apiEndPoint: string = "api/PostModels";
+const port: string = "7175";
+const apiEndPoint: string = `https://localhost:${port}/api/PostModels`;
 
 export async function getPosts(): Promise<Post[]> {
-    const response = await fetch(apiEndPoint);
-    const data = await response.json();
-    return data as Post[];
+    try {
+        const response = await fetch(apiEndPoint);
+        const data = await response.json();
+        console.log("DATA:" + data);
+        const posts: Post[] = JSON.parse(data);
+
+        return posts;
+    } catch (e: any) {
+        console.error(e.message);
+        return [];
+    }
 }
 
 export async function createPost(newPost: Post): Promise<void> {
@@ -25,7 +35,7 @@ export async function getSinglePost(id: number): Promise<Post> {
 }
 
 export async function putPost(updatedPost: Post) {
-    await fetch(`${apiEndPoint}/${updatedPost.id}`, {
+    await fetch(`${apiEndPoint}/${updatedPost._id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

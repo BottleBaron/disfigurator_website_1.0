@@ -1,10 +1,24 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { mockPosts } from "../../resources/testData/mockData";
-import { useAppDispatch } from "../redux/store";
+import { useEffect } from "react";
+import { fetchPosts } from "../redux/postThunks";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 
 function NewsPage() {
     const dispatch = useAppDispatch();
+    const dbPosts = useAppSelector((state) => state.post.posts);
+
+    const fetchData = async () => {
+        const action = await dispatch(fetchPosts());
+        if (fetchPosts.fulfilled.match(action)) {
+            console.log("postFetch Succeeded");
+        } else console.error(action.payload);
+    };
+
+    useEffect(() => {
+        fetchData();
+        console.log("NewsPage Mounted");
+    });
 
     return (
         <Box
@@ -17,7 +31,7 @@ function NewsPage() {
             }}
         >
             <Box sx={{ width: "100%", marginBlock: 5 }}>
-                {mockPosts.map((post) => (
+                {dbPosts.map((post) => (
                     <Box
                         sx={{
                             display: "flex",
