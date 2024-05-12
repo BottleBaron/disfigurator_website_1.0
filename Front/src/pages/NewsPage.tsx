@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect } from "react";
+import { Post } from "../redux/postSlice";
 import { fetchPosts } from "../redux/postThunks";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 
 function NewsPage() {
     const dispatch = useAppDispatch();
-    const dbPosts = useAppSelector((state) => state.post.posts);
+    const dbPosts = useAppSelector((state: any) => state.post.posts);
 
     const fetchData = async () => {
         const action = await dispatch(fetchPosts());
@@ -31,7 +33,7 @@ function NewsPage() {
             }}
         >
             <Box sx={{ width: "100%", marginBlock: 5 }}>
-                {dbPosts.map((post) => (
+                {dbPosts.map((post: Post) => (
                     <Box
                         sx={{
                             display: "flex",

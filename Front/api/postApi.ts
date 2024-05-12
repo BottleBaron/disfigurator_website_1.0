@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Post } from "../src/redux/postSlice";
 
-const port: string = "7175";
+const port: string = "44370";
 const apiEndPoint: string = `https://localhost:${port}/api/PostModels`;
+
 
 export async function getPosts(): Promise<Post[]> {
     try {

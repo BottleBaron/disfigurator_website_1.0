@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using Back.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Back_2._0.Controllers
 {
+    [EnableCors("AllowAnyOrigin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PostModelsController : ControllerBase

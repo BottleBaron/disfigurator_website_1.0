@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 // Continue working on removing efcore: https://dev.to/arminafa/create-a-web-api-with-aspnet-core-7-and-mongodb-2j51
+
 namespace Back;
 
 public class Program
@@ -26,6 +27,16 @@ public class Program
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAnyOrigin",
+                b => b
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+            );
+        });
 
         var app = builder.Build();
 
@@ -35,6 +46,8 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.UseCors();
+        
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
