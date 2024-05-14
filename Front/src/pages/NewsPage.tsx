@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Post } from "../redux/postSlice";
 import { fetchPosts } from "../redux/postThunks";
 import { useAppDispatch, useAppSelector } from "../redux/store";
@@ -9,18 +9,21 @@ import { useAppDispatch, useAppSelector } from "../redux/store";
 function NewsPage() {
     const dispatch = useAppDispatch();
     const dbPosts = useAppSelector((state: any) => state.post.posts);
+    const [isLoaded, togglePageIsLoaded] = useState(false);
+
 
     const fetchData = async () => {
         const action = await dispatch(fetchPosts());
         if (fetchPosts.fulfilled.match(action)) {
             console.log("postFetch Succeeded");
+            togglePageIsLoaded(!isLoaded);
         } else console.error(action.payload);
     };
 
     useEffect(() => {
         fetchData();
         console.log("NewsPage Mounted");
-    });
+    }, [isLoaded]);
 
     return (
         <Box
