@@ -26,7 +26,7 @@ export const fetchPosts = createAppAsyncThunk<Post[], void>(
 export const updatePost = createAppAsyncThunk<Post, Post>(
     "post/update",
     async (updatedPost: Post, thunkAPI) => {
-        if (!updatedPost._id) {
+        if (!updatedPost.id) {
             return thunkAPI.rejectWithValue(
                 "userData requires an Id to update"
             );

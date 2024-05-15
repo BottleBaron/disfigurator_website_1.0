@@ -4,7 +4,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { addPost, deletePost, fetchPosts, updatePost } from "./postThunks";
 
 export interface Post {
-    _id: string;
+    id: string;
     title: string;
     content: string;
     imageUrls: string[];
@@ -41,7 +41,7 @@ const postSlice = createSlice({
         );
         builder.addCase(updatePost.fulfilled, (state, action) => {
             const updatedPostIndex = state.posts.findIndex(
-                (household) => household._id === action.payload._id
+                (household) => household.id === action.payload.id
             );
             if (updatedPostIndex !== -1) {
                 state.posts[updatedPostIndex] = action.payload;
@@ -49,7 +49,7 @@ const postSlice = createSlice({
         });
         builder.addCase(deletePost.fulfilled, (state, action) => {
             state.posts = state.posts.filter(
-                (post) => post._id !== action.payload
+                (post) => post.id !== action.payload
             );
         });
     },

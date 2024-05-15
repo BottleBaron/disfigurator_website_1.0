@@ -75,6 +75,7 @@ function NewsPage() {
                                     {post.content}
                                 </Typography>
                             </Box>
+                            <p className="caret-slate-700">pid: {post.id}</p>
                         </Box>
                         <hr style={{ width: "100%" }} />
                     </Box>

@@ -25,9 +25,9 @@ public class PostModel
         ImageUrls = [];
     }
 
-    public PostModel(string content, string title, string[] imageUrls) {
-
-        Id = new ObjectId().ToString();
+    public PostModel(string id, string content, string title, string[] imageUrls)
+    {
+        Id = id;
         Content = content;
         Title = title;
         ImageUrls = imageUrls;

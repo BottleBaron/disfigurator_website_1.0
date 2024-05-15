@@ -14,8 +14,8 @@ export async function getPosts(): Promise<Post[]> {
             }
         });
         const data = await response.json();
-        console.log("DATA:" + data);
-        const posts: Post[] = JSON.parse(data);
+        console.log("DATA:" + data.toString());
+        const posts: Post[] = data;
 
         return posts;
     } catch (e: any) {
@@ -46,7 +46,7 @@ export async function getSinglePost(id: number): Promise<Post> {
 }
 
 export async function putPost(updatedPost: Post) {
-    await fetch(`${apiEndPoint}/${updatedPost._id}`, {
+    await fetch(`${apiEndPoint}/${updatedPost.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

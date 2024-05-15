@@ -64,9 +64,9 @@ namespace Back_2._0.Controllers
         // POST: api/PostModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<PostModel>> PostPostModel(PostModelDto postModelDto)
+        public async Task<ActionResult<PostModel>> PostPostModel(PostModel postIn)
         {
-            var post = new PostModel(postModelDto.Content, postModelDto.Title, postModelDto.ImageUrls);
+            var post = new PostModel(postIn.Id, postIn.Content, postIn.Title, postIn.ImageUrls);
 
             await _context.Posts.InsertOneAsync(post);
             return CreatedAtRoute(new { id = post.Id }, post);

@@ -11,6 +11,7 @@ import {
 import App from "./App.tsx";
 import RootLayout from "./components/RootLayout.tsx";
 import { ThemeContextProvider } from "./context/ThemeContext.tsx";
+import AdminPage from "./pages/AdminPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import NewsPage from "./pages/NewsPage.tsx";
 import NotFoundRedirect from "./pages/NotFoundRedirect.tsx";
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
             <Route path="/" element={<App />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="*" element={<NotFoundRedirect />} />
         </Route>
     )
