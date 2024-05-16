@@ -107,6 +107,7 @@ export default function RootLayout() {
                                     marginInline: 5,
                                 }}
                                 src="../../resources/icons/mingcute--threads-line.svg"
+                                alt="threadsIcon"
                             />
                         </NavLink>
                         <NavLink to="https://linktr.ee/disfigurator">
@@ -117,6 +118,7 @@ export default function RootLayout() {
                                     marginInline: 5,
                                 }}
                                 src="../../resources/icons/simple-icons--linktree.svg"
+                                alt="linktreeIcon"
                             />
                         </NavLink>
                         <NavLink to="https://open.spotify.com/artist/6QSGrK5gotJxfy6mf3uLfJ?si=9O7q-QEpTxmikc7A9ENqLQ">
@@ -127,6 +129,7 @@ export default function RootLayout() {
                                     marginInline: 5,
                                 }}
                                 src="../../resources/icons/mdi--spotify.svg"
+                                alt="spotifyIcon"
                             />
                         </NavLink>
                         <NavLink to="https://www.youtube.com/@disfigurator">
@@ -137,6 +140,7 @@ export default function RootLayout() {
                                     marginInline: 5,
                                 }}
                                 src="../../resources/icons/mdi--youtube.svg"
+                                alt="YTIcon"
                             />
                         </NavLink>
                     </Box>

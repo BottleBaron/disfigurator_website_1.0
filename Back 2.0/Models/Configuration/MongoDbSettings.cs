@@ -1,4 +1,4 @@
-﻿namespace Back.Model;
+﻿namespace Back;
     public class MongoDbSettings
     {
         public string? ConnectionString { get; set; }

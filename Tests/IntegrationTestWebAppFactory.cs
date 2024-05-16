@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using MongoDB.Driver;
 using Xunit;
 using Microsoft.Extensions.DependencyInjection;
-using Back.Model;
 
-namespace Back_2._0.Tests
+namespace Back.Tests
 {
     public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>
     {

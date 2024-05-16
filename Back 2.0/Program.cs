@@ -1,9 +1,12 @@
-using Back.Model;
+using Back;
+using Back_2._0.Models;
+using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using UserContext = Back_2._0.Models.UserContext;
 
 // Continue working on removing efcore: https://dev.to/arminafa/create-a-web-api-with-aspnet-core-7-and-mongodb-2j51
 
@@ -23,6 +26,12 @@ public class Program
         {
             var settings = serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value;
             return new PostContext(settings.ConnectionString ?? string.Empty, settings.DatabaseName ?? string.Empty);
+        });
+        
+        builder.Services.AddSingleton(serviceProvider =>
+        {
+            var settings = serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value;
+            return new UserContext(settings.ConnectionString ?? string.Empty, settings.DatabaseName ?? string.Empty);
         });
 
         builder.Services.AddEndpointsApiExplorer();

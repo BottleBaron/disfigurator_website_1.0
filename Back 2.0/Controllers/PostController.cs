@@ -15,11 +15,11 @@ namespace Back.Controllers
     [EnableCors("AllowAnyOrigin")]
     [Route("api/[controller]")]
     [ApiController]
-    public class PostModelsController : ControllerBase
+    public class PostController : ControllerBase
     {
         private readonly PostContext _context;
 
-        public PostModelsController(PostContext context)
+        public PostController(PostContext context)
         {
             _context = context;
         }

@@ -1,6 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Fade, Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { User } from "../redux/userSlice";
+
+const UserSchema: z.ZodType<User> = z.object({
+  username: z.string().min(1, { message: "Username cannot be empty" }),
+  password: z.string().min(1, { message: "Message cannot be empty" }),
+});
 
 function LoginModal() {
   const [loginModalEnabled, setLoginModal] = useState(true);
@@ -8,6 +18,15 @@ function LoginModal() {
   const handleLogin = () => {
     setLoginModal(false);
   };
+
+  const { register, handleSubmit, formState } = useForm<User>({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+
+    resolver: zodResolver(UserSchema),
+  });
 
   return (
     <Box>
@@ -32,12 +51,15 @@ function LoginModal() {
               alignItems: "center",
             }}
           >
-            <Button
-              sx={{ height: 50, width: "100%", bgcolor: "ButtonFace" }}
-              onClick={handleLogin}
-            >
-              Login
-            </Button>
+            <form>
+
+              <Button
+                sx={{ height: 50, width: "100%", bgcolor: "ButtonFace" }}
+                type="submit"
+              >
+                Login
+              </Button>
+            </form>
           </Box>
         </Fade>
       </Modal>

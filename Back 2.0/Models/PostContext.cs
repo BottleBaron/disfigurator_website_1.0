@@ -5,7 +5,7 @@ using MongoDB.Bson;
 using Microsoft.Extensions.Configuration;
 using MongoDB.EntityFrameworkCore.Extensions;
 
-namespace Back.Model;
+namespace Back;
 
 
 
@@ -21,6 +21,6 @@ public class PostContext
         db = client.GetDatabase(dataBaseName);
     }
 
-    public IMongoCollection<PostModel> Posts => db.GetCollection<PostModel>("posts");
+    public IMongoCollection<Post> Posts => db.GetCollection<Post>("posts");
 }
 

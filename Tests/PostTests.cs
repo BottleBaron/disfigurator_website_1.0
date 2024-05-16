@@ -1,16 +1,16 @@
 namespace Back.Tests;
 
 using Xunit;
-using Back.Model;
+using Back;
 using FluentAssertions;
 
-public class PostModelTests
+public class PostTests
 {
     [Fact]
     public void PostModel_Initialization_Success()
     {
         // Arrange
-        var postModel = new PostModel();
+        var postModel = new Post();
 
         // Assert
         postModel.Should().NotBeNull();
@@ -26,7 +26,7 @@ public class PostModelTests
         var imageUrls = new[] { "url1", "url2" };
 
         // Act
-        var postModel = new PostModel
+        var postModel = new Post
         {
             Id = id,
             Content = content,

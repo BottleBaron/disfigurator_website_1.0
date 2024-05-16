@@ -1,9 +1,9 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Back.Model;
+namespace Back;
 
-public class PostModel
+public class Post
 {
     [BsonId]
     public string Id { get; set; }
@@ -18,32 +18,18 @@ public class PostModel
     public string[] ImageUrls { get; set; }
 
 
-    public PostModel() {
+    public Post() {
         Id = string.Empty;
         Content = string.Empty;
         Title = string.Empty;
         ImageUrls = [];
     }
 
-    public PostModel(string id, string content, string title, string[] imageUrls)
+    public Post(string id, string content, string title, string[] imageUrls)
     {
         Id = id;
         Content = content;
         Title = title;
-        ImageUrls = imageUrls;
-    }
-}
-
-public class PostModelDto
-{
-    public string Title { get; set; }
-    public string Content { get; set; }
-    public string[] ImageUrls { get; set;}
-
-    public PostModelDto(string title, string content, string[] imageUrls)
-    {
-        Title = title;
-        Content = content;
         ImageUrls = imageUrls;
     }
 }

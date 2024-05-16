@@ -1,17 +1,13 @@
-﻿using Back.Model;
-using System.Net;
-using FluentAssertions;
-using Xunit;
-using System.Runtime.CompilerServices;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Newtonsoft.Json;
-using MongoDB.Driver;
-using MongoDB.Bson;
+﻿using System.Net;
 using System.Net.Http.Json;
+using Back.Tests;
+using Back;
+using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
-namespace Back_2._0.Tests
+namespace Tests
 {
     public class PostE2ETests(IntegrationTestWebAppFactory factory) : IClassFixture<IntegrationTestWebAppFactory>
     {
@@ -19,9 +15,9 @@ namespace Back_2._0.Tests
         public async Task Post_Returns_Created()
         {
             var client = factory.CreateClient();
-            var request = new PostModel("Test", "test", ["test1", "test2"]);
+            var request = new Post("PlaceholderId","Test", "test", ["test1", "test2"]);
 
-            var response = await client.PostAsJsonAsync("api/PostModels", request, CancellationToken.None);
+            var response = await client.PostAsJsonAsync("api/Post", request, CancellationToken.None);
 
             response.StatusCode.Should().Be(HttpStatusCode.Created);
         }
@@ -31,7 +27,7 @@ namespace Back_2._0.Tests
         {
             var client = factory.CreateClient();
 
-            var response = await client.GetAsync("api/PostModels", CancellationToken.None);
+            var response = await client.GetAsync("api/Post", CancellationToken.None);
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -46,11 +42,11 @@ namespace Back_2._0.Tests
                 var context = scopedServices.GetRequiredService<PostContext>();
                 var client = factory.CreateClient();
 
-                var request = new PostModel("Test", "test", ["test1", "test2"]);
+                var request = new Post("PlaceholderId","Test", "test", ["test1", "test2"]);
                 var filter = request.ToBsonDocument();
 
                 // Act
-                await client.PostAsJsonAsync("api/PostModels", request, CancellationToken.None);
+                await client.PostAsJsonAsync("api/Post", request, CancellationToken.None);
 
                 // Assert
                 var cursor = context.Posts.Find(filter);
