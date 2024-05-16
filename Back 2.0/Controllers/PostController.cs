@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
-using Back.Model;
+using Back;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace Back_2._0.Controllers
+namespace Back.Controllers
 {
     [EnableCors("AllowAnyOrigin")]
     [Route("api/[controller]")]
@@ -26,14 +26,14 @@ namespace Back_2._0.Controllers
 
         // GET: api/PostModels
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PostModel>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
             return await _context.Posts.Find(_ => true).ToListAsync();
         }
 
         // GET: api/PostModels/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PostModel>> GetPostModel(string id)
+        public async Task<ActionResult<Post>> GetPostModel(string id)
         {
             var postModel = await _context.Posts.Find(p => p.Id == id).FirstOrDefaultAsync();
 
@@ -47,7 +47,7 @@ namespace Back_2._0.Controllers
 
         // PUT: api/PostModels/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPostModel(string id, PostModel postIn)
+        public async Task<IActionResult> PutPostModel(string id, Post postIn)
         {
             var post = await _context.Posts.Find(p => p.Id == id).FirstOrDefaultAsync();
 
@@ -64,9 +64,9 @@ namespace Back_2._0.Controllers
         // POST: api/PostModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<PostModel>> PostPostModel(PostModel postIn)
+        public async Task<ActionResult<Post>> PostPostModel(Post postIn)
         {
-            var post = new PostModel(postIn.Id, postIn.Content, postIn.Title, postIn.ImageUrls);
+            var post = new Post(postIn.Id, postIn.Content, postIn.Title, postIn.ImageUrls);
 
             await _context.Posts.InsertOneAsync(post);
             return CreatedAtRoute(new { id = post.Id }, post);
