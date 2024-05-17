@@ -51,7 +51,7 @@ export default function RootLayout() {
                     >
                         <NavLink
                             style={{
-                                paddingInline: 10,
+                                marginInline: 10,
                                 fontSize: "1.3vw",
                             }}
                             to="/contact"
@@ -60,7 +60,7 @@ export default function RootLayout() {
                         </NavLink>
                         <NavLink
                             style={{
-                                paddingInline: 10,
+                                marginInline: 10,
                                 fontSize: "1.3vw",
                             }}
                             to="/news"
