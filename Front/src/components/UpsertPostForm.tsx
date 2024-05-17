@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../redux/store";
 
 const PostSchema: z.ZodType<Post> = z.object({
   id: z.string(),
-  imageUrls: z.array(z.string().url({ message: "Must be a valid URL" })),
+  imageUrl: z.string().url({message: "Must be a valid URL"}),
   title: z.string().min(1, { message: "Title cannot be empty" }),
   content: z.string().min(1, { message: "Content cannot be empty" }),
 });
@@ -23,7 +23,7 @@ function UpsertPostForm() {
     id: "",
     title: "",
     content: "",
-    imageUrls: [],
+    imageUrl: "",
   };
 
   const { register, handleSubmit, formState } = useForm<Post>({
@@ -31,7 +31,7 @@ function UpsertPostForm() {
       id: defaultId,
       title: defaultValuePost.title,
       content: defaultValuePost.content,
-      imageUrls: defaultValuePost.imageUrls,
+      imageUrl: defaultValuePost.imageUrl,
     },
 
     resolver: zodResolver(PostSchema),
@@ -41,10 +41,8 @@ function UpsertPostForm() {
     console.log("UPSERTPOSTFORM SUBMITTED")
     if (postState.some((p) => p.id == post.id)) {
       dispatch(updatePost(post));
-      console.log("Called Dispatch to update POST!!");
     } else {
       dispatch(addPost(post));
-      console.log("Called Dispatch to add POST!");
     }
   };
 
@@ -96,20 +94,20 @@ function UpsertPostForm() {
         <label htmlFor="content">Content</label>
         <input
           className={`border-2 ${
-            formState.errors.title ? "border-red-500" : "border-slate-200"
+            formState.errors.content ? "border-red-500" : "border-slate-200"
           } `}
           id="content"
           type="text"
           style={{ display: "flex" }}
-          {...register("title")}
+          {...register("content")}
         />
         {formState.errors.title && (
-          <span className="text-red-500">{formState.errors.title.message}</span>
+          <span className="text-red-500">{formState.errors.content?.message}</span>
         )}
       </fieldset>
 
       <fieldset className="flex flex-col justify-between">
-        <label htmlFor="imageUrls">Image Links</label>
+        <label htmlFor="imageUrls">Image Link</label>
         <input
           className={`border-2 ${
             formState.errors.title ? "border-red-500" : "border-slate-200"
@@ -117,47 +115,14 @@ function UpsertPostForm() {
           id="imageUrls"
           type="url"
           style={{ display: "flex" }}
-          {...register("imageUrls.0")}
+          {...register("imageUrl")}
         />
-        {formState.errors.title && (
+        {formState.errors.imageUrl && (
           <span className="text-red-500">
-            {formState.errors.imageUrls?.message}
+            {formState.errors.imageUrl.message}
           </span>
         )}
       </fieldset>
-      <fieldset className="flex flex-col justify-between">
-        <input
-          className={`border-2 ${
-            formState.errors.title ? "border-red-500" : "border-slate-200"
-          }`}
-          id="imageUrls"
-          type="url"
-          style={{ display: "flex" }}
-          {...register("imageUrls.1")}
-        />
-        {formState.errors.title && (
-          <span className="text-red-500">
-            {formState.errors.imageUrls?.message}
-          </span>
-        )}
-      </fieldset>
-      <fieldset className="flex flex-col justify-between">
-        <input
-          className={`border-2 ${
-            formState.errors.title ? "border-red-500" : "border-slate-200"
-          }`}
-          id="imageUrls"
-          type="url"
-          style={{ display: "flex" }}
-          {...register("imageUrls.2")}
-        />
-        {formState.errors.title && (
-          <span className="text-red-500">
-            {formState.errors.imageUrls?.message}
-          </span>
-        )}
-      </fieldset>
-
       <Button type="submit">Upsert Post</Button>
     </form>
   );

@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { getUsers } from "../../api/userApi";
+import createAppAsyncThunk from "./utils";
 
 export interface User {
-    id: string;
+    id?: string;
     username: string;
     password: string;
 }
 
-export interface PostState {
+export interface UserState {
     users: User[];
 }
 
-const initialState: PostState = {
+const initialState: UserState = {
     users: [],
 };
 
@@ -20,8 +22,8 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        setUsers: (state: any, action: PayloadAction<PostState>) => {
-            state.posts = action.payload;
+        setUsers: (state: any, action: PayloadAction<UserState>) => {
+            state.users = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -34,9 +36,9 @@ const userSlice = createSlice({
     },
 });
 
-export const fetchUsers = createAppAsyncThunk<User, void>(
-    "users/get",
-    async (n, thunkApi) => {
+export const fetchUsers = createAppAsyncThunk<User[], void>(
+    "user/get",
+    async (n , thunkApi) => {
         try {
             return await getUsers();
         } catch (e: any) {

@@ -23,7 +23,7 @@ public class PostTests
         var id = "test";
         var content = "Test Content";
         var title = "Test Title";
-        var imageUrls = new[] { "url1", "url2" };
+        var imageUrl = "https://www.testurl.com";
 
         // Act
         var postModel = new Post
@@ -31,13 +31,13 @@ public class PostTests
             Id = id,
             Content = content,
             Title = title,
-            ImageUrls = imageUrls
+            ImageUrl = imageUrl
         };
 
         // Assert
         postModel.Id.Should().Be(id);
         postModel.Content.Should().Be(content);
         postModel.Title.Should().Be(title);
-        postModel.ImageUrls.Should().Contain(imageUrls);
+        postModel.ImageUrl.Should().Be(imageUrl);
     }
 }

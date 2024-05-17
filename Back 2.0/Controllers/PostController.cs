@@ -28,7 +28,9 @@ namespace Back.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
-            return await _context.Posts.Find(_ => true).ToListAsync();
+            var result = await _context.Posts.Find(_ => true).ToListAsync();
+            result.Reverse();
+            return result;
         }
 
         // GET: api/PostModels/5
@@ -66,7 +68,7 @@ namespace Back.Controllers
         [HttpPost]
         public async Task<ActionResult<Post>> PostPostModel(Post postIn)
         {
-            var post = new Post(postIn.Id, postIn.Content, postIn.Title, postIn.ImageUrls);
+            var post = new Post(postIn.Id, postIn.Content, postIn.Title, postIn.ImageUrl);
 
             await _context.Posts.InsertOneAsync(post);
             return CreatedAtRoute(new { id = post.Id }, post);

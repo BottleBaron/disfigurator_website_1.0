@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createPost, getPosts, putPost } from "../../api/postApi";
+import { createPost, delPost, getPosts, putPost } from "../../api/postApi";
 import { Post } from "./postSlice";
 import createAppAsyncThunk from "./utils";
 
@@ -43,7 +43,7 @@ export const deletePost = createAppAsyncThunk<string, string>(
     "post/delete",
     async (postId: string, thunkAPI) => {
         try {
-            await deletePost(postId);
+            await delPost(postId);
             return postId;
         } catch (e: any) {
             return thunkAPI.rejectWithValue(e.message);

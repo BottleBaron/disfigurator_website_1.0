@@ -2,7 +2,7 @@
 import { Post } from "../src/redux/postSlice";
 
 const port: string = "5119";
-const apiEndPoint: string = `http://localhost:${port}/api/PostModels`;
+const apiEndPoint: string = `http://localhost:${port}/api/Post`;
 
 
 export async function getPosts(): Promise<Post[]> {
@@ -55,8 +55,13 @@ export async function putPost(updatedPost: Post) {
     });
 }
 
-export async function deletePost(id: number) {
+export async function delPost(id: string) {
     await fetch(`${apiEndPoint}/${id}`, {
         method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        }
     });
+
+    console.log("Request sent");
 }

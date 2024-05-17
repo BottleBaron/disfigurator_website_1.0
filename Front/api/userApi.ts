@@ -14,9 +14,9 @@ export async function getUsers(): Promise<User[]> {
         });
         const data = await response.json();
         console.log("DATA:" + data.toString());
-        const posts: User[] = data;
+        const users: User[] = data;
 
-        return posts;
+        return users;
     } catch (e: any) {
         console.error(e.message);
         return [];

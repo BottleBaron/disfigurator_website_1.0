@@ -7,7 +7,7 @@ export interface Post {
     id: string;
     title: string;
     content: string;
-    imageUrls: string[];
+    imageUrl: string;
 }
 
 export interface PostState {

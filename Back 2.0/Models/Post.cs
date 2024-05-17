@@ -15,21 +15,21 @@ public class Post
     public string Content { get; set; }
 
     [BsonElement("ImageUrls")]
-    public string[] ImageUrls { get; set; }
+    public string ImageUrl { get; set; }
 
 
     public Post() {
         Id = string.Empty;
         Content = string.Empty;
         Title = string.Empty;
-        ImageUrls = [];
+        ImageUrl = string.Empty;
     }
 
-    public Post(string id, string content, string title, string[] imageUrls)
+    public Post(string id, string content, string title, string imageUrls)
     {
         Id = id;
         Content = content;
         Title = title;
-        ImageUrls = imageUrls;
+        ImageUrl = imageUrls;
     }
 }

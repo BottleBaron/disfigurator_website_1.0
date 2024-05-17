@@ -15,7 +15,7 @@ namespace Tests
         public async Task Post_Returns_Created()
         {
             var client = factory.CreateClient();
-            var request = new Post("PlaceholderId","Test", "test", ["test1", "test2"]);
+            var request = new Post("PlaceholderId","Test", "test", "test");
 
             var response = await client.PostAsJsonAsync("api/Post", request, CancellationToken.None);
 
@@ -42,7 +42,7 @@ namespace Tests
                 var context = scopedServices.GetRequiredService<PostContext>();
                 var client = factory.CreateClient();
 
-                var request = new Post("PlaceholderId","Test", "test", ["test1", "test2"]);
+                var request = new Post("PlaceholderId","Test", "test", "test");
                 var filter = request.ToBsonDocument();
 
                 // Act

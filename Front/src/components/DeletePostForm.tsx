@@ -1,38 +1,59 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Typography } from "@mui/material";
-import { FormEvent, useState } from "react";
-import { deletePost } from "../redux/postThunks";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { deletePost, fetchPosts } from "../redux/postThunks";
 import { useAppDispatch, useAppSelector } from "../redux/store";
+
+interface PostIdDTO {
+  id: string
+}
+
+const PostIdSchema: z.ZodType<PostIdDTO> = z.object({
+  id: z.string().min(10, {message: "Id must be at least 10 characters"}),
+
+});
 
 function DeletePostForm() {
   const dispatch = useAppDispatch();
   const postState = useAppSelector((state) => state.post.posts);
 
 
+  const [isLoaded, setPageIsLoaded] = useState(false);
+  const fetchData = async () => {
+      const action = await dispatch(fetchPosts());
+      if (fetchPosts.fulfilled.match(action)) {
+          console.log("Post data fetch Succeeded for delete form");
+          setPageIsLoaded(true);
+      } else console.error(action.payload);
+  };
+  
+  if (!isLoaded) fetchData()
 
-  const [ isValid, setIsValid ] = useState(false);
-  const [ textState, setTextState ] = useState("");
+    const { register, handleSubmit, formState } = useForm<PostIdDTO>({
+      defaultValues: {
+        id: "",
+      },
+      resolver: zodResolver(PostIdSchema),
+    });
+
 
   const formfont = {
     fontWeight: "bold",
     fontSize: 18,
   };
 
-  function onSubmitDeleteForm(event: FormEvent<HTMLFormElement>) {
-    
-    console.log("Form Submitted")
-    event.preventDefault();
-
-
-    if (postState.some((p) => p.id == textState)) {
-      dispatch(deletePost(textState));
-      setIsValid(true);
-    } else setIsValid(false);
+  function onSubmitDeletePost(postId: PostIdDTO) {
+    if (postState.some((p) => p.id == postId.id)) {
+      dispatch(deletePost(postId.id));
+    }
   }
 
   return (
     <form
       className="flex flex-col items-center, justify-center"
-      onSubmit={onSubmitDeleteForm}
+      onSubmit={handleSubmit(onSubmitDeletePost)}
     >
       <Typography sx={formfont}>Delete Post</Typography>
 
@@ -40,14 +61,14 @@ function DeletePostForm() {
         <label htmlFor="id">Id</label>
         <input
           className={`border-2 ${
-            isValid ? "border-red-500" : "border-slate-200"
+            formState.errors.id ? "border-red-500" : "border-slate-200"
           } `}
           id="id"
           type="text"
-          onChange={(e) => setTextState(e.target.value)}
+          {...register("id")}
           style={{ display: "flex" }}
         />
-        {isValid && <span className="text-red-500">Id was not valid</span>}
+        {formState.errors.id && <span className="text-red-500">{formState.errors.id.message}</span>}
       </fieldset>
       <Button type="submit">Delete Post</Button>
     </form>
