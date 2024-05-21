@@ -20,10 +20,10 @@ public class PostTests
     public void PostModel_Properties_SetCorrectly()
     {
         // Arrange
-        var id = "test";
-        var content = "Test Content";
-        var title = "Test Title";
-        var imageUrl = "https://www.testurl.com";
+        const string id = "test";
+        const string content = "Test Content";
+        const string title = "Test Title";
+        const string imageUrl = "https://www.testurl.com";
 
         // Act
         var postModel = new Post

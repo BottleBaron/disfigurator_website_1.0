@@ -43,14 +43,16 @@ namespace Tests
                 var client = factory.CreateClient();
 
                 var request = new Post("PlaceholderId","Test", "test", "test");
-                var filter = request.ToBsonDocument();
-
+                var filter = Builders<Post>.Filter.Eq(p => p.Id, "PlaceholderId");
                 // Act
                 await client.PostAsJsonAsync("api/Post", request, CancellationToken.None);
 
                 // Assert
-                var cursor = context.Posts.Find(filter);
-                cursor.CountDocuments().Should().Be(1);
+                var result = context.Posts.Find<Post>(filter).FirstOrDefault();
+                result.Id.Should().Be("PlaceholderId");
+                result.Content.Should().Be("Test");
+                result.Title.Should().Be("test");
+                result.ImageUrl.Should().Be("test");
             }
         }
     }

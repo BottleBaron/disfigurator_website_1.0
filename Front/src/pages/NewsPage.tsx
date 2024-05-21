@@ -11,6 +11,7 @@ function NewsPage() {
   const dbPosts = useAppSelector((state: any) => state.post.posts);
   const [isLoaded, setPageIsLoaded] = useState(false);
 
+
   const fetchData = async () => {
     const action = await dispatch(fetchPosts());
     if (fetchPosts.fulfilled.match(action)) {
@@ -31,7 +32,7 @@ function NewsPage() {
         marginInline: "5%",
       }}
     >
-      <Box sx={{ width: "100%", marginBlock: 5 }}>
+      <Box sx={{ width: "80%", maxWidth: '1500px' ,marginBlock: 5 }}>
         {dbPosts.map((post: Post) => (
           <Box
             sx={{
@@ -56,7 +57,7 @@ function NewsPage() {
               <img
                 style={{
                   flex: 1,
-                  maxWidth: "60%",
+                  maxWidth: "700px",
                   height: "auto",
                   paddingInline: 20,
                 }}

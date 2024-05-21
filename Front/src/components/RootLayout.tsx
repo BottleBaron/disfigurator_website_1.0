@@ -1,5 +1,6 @@
 import { Box, CssBaseline, ThemeProvider, Typography } from "@mui/material";
 import { NavLink, Outlet } from "react-router-dom";
+import "../assets/customfontstyling.css";
 import { useThemeSelector } from "../context/ThemeContext";
 
 export default function RootLayout() {
@@ -53,6 +54,8 @@ export default function RootLayout() {
                             style={{
                                 marginInline: 10,
                                 fontSize: "1.3vw",
+                                color: "ButtonText",
+                                fontFamily: 'BloodSeeker, sans-serif'
                             }}
                             to="/contact"
                         >
@@ -62,6 +65,8 @@ export default function RootLayout() {
                             style={{
                                 marginInline: 10,
                                 fontSize: "1.3vw",
+                                color: "ButtonText",
+                                fontFamily: 'BloodSeeker, sans-serif'
                             }}
                             to="/news"
                         >
@@ -186,7 +191,7 @@ export default function RootLayout() {
                     }}
                 >
                     <Typography>
-                        Intellectual property of Disfigurator © 2023
+                        Intellectual property of Disfigurator © 2024
                     </Typography>
                 </Box>
             </Box>

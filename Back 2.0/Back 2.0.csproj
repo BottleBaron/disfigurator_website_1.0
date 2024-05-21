@@ -32,4 +32,8 @@
     <PackageReference Include="Xunit" Version="2.7.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Interfaces\" />
+  </ItemGroup>
+
 </Project>
