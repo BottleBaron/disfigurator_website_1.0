@@ -55,6 +55,7 @@ export default function RootLayout() {
                                 marginInline: 10,
                                 fontSize: "1.3vw",
                                 color: "ButtonText",
+                                background: "rgb(0, 0, 0, 0.3)",
                                 fontFamily: 'BloodSeeker, sans-serif'
                             }}
                             to="/contact"
@@ -66,6 +67,7 @@ export default function RootLayout() {
                                 marginInline: 10,
                                 fontSize: "1.3vw",
                                 color: "ButtonText",
+                                background: "rgb(0, 0, 0, 0.3)",
                                 fontFamily: 'BloodSeeker, sans-serif'
                             }}
                             to="/news"
